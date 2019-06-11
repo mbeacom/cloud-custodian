@@ -110,8 +110,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#install-cloud-custodian-and-azure-plugin">Install Cloud Custodian and Azure Plugin</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#option-1-install-released-packages-to-local-python-environment">Option 1: Install released packages to local Python Environment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#option-2-install-latest-from-the-repository">Option 2: Install latest from the repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#option-1-install-latest-from-the-repository">Option 1: Install latest from the repository</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#write-your-first-policy">Write your first policy</a></li>
@@ -226,15 +225,8 @@
 <p>Cloud Custodian is a Python application and supports Python 2 and 3 on Linux and Windows.
 We recommend using Python 3.6 or higher.</p>
 <p>The Azure provider is an additional package which is installed in addition to c7n.</p>
-<div class="section" id="option-1-install-released-packages-to-local-python-environment">
-<h3>Option 1: Install released packages to local Python Environment<a class="headerlink" href="#option-1-install-released-packages-to-local-python-environment" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install c7n
-$ pip install c7n_azure
-</pre></div>
-</div>
-</div>
-<div class="section" id="option-2-install-latest-from-the-repository">
-<h3>Option 2: Install latest from the repository<a class="headerlink" href="#option-2-install-latest-from-the-repository" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="option-1-install-latest-from-the-repository">
+<h3>Option 1: Install latest from the repository<a class="headerlink" href="#option-1-install-latest-from-the-repository" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/cloud-custodian/cloud-custodian.git
 $ <span class="nb">cd</span> cloud-custodian
 $ pip install -e .

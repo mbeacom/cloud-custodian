@@ -1,0 +1,508 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Developer Guide &mdash; Cloud Custodian  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/c1_labs.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/js/expand.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/expand.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="c7n-org: Multi Account Custodian Execution" href="../tools/c7n-org.html" />
+    <link rel="prev" title="Load Balancer" href="policy/resources/loadbalancer.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cloud Custodian
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Cloud Custodian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../filters.html">Generic Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../actions.html">Generic Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/advanced.html">Advanced Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/policyStructure.html">Example tag compliance policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/glossary.html">Basic concepts and terms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/deployment.html">Deployment</a></li>
+</ul>
+<p class="caption"><span class="caption-text">AWS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../aws/gettingstarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aws/examples/index.html">Example Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aws/policy/index.html">Filters and Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aws/aws-modes.html">AWS Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aws/usage.html">Monitoring your environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aws/policy/lambda.html">Lambda Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aws/policy/mu.html">Mu - Lambda Lifecycle Management</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Azure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../azure/gettingstarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../azure/authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../azure/authentication.html#azure-storage-access">Azure Storage access</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../azure/examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../azure/policy/index.html">Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../azure/azure-modes.html">Azure Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../azure/advanced/index.html">Advanced Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../azure/contribute.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../azure/contribute.html#adding-new-azure-resources">Adding New Azure Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../azure/contribute.html#testing">Testing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GCP</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gcp-modes.html">GCP Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policy/index.html">Policies</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#adding-new-gcp-resources">Adding New GCP Resources</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#create-new-gcp-resource">Create New GCP Resource</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#load-new-gcp-resource">Load New GCP Resource</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#testing">Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#test-cases-for-resources-list-methods">Test cases for resources list methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-cases-for-resources-get-methods">Test cases for resources get methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-tests">Running tests</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Tools</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tools/c7n-org.html">c7n-org: Multi Account Custodian Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/c7n-policystream.html">c7n-policystream: Policy Changes from Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/c7n-mailer.html">c7n-mailer: Custodian Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/c7n-trailcreator.html">AWS Retroactive Tagging Resource Creators</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contribute.html">Contributing to Cloud Custodian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/index.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/installing.html">Installing for Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/tests.html">Testing for Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/documentation.html">Documentation For Developers</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cloud Custodian</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Developer Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="developer-guide">
+<span id="gcp-contribute"></span><h1>Developer Guide<a class="headerlink" href="#developer-guide" title="Permalink to this headline">¶</a></h1>
+<p>The c7n developer install includes c7n_gcp.  A shortcut for creating a virtual env for development is available
+in the makefile:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ make install
+$ <span class="nb">source</span> bin/activate
+</pre></div>
+</div>
+<p>This creates a virtual env in your enlistment and installs all packages as editable.</p>
+<p>Instead, you can do <cite>pip install -r tools/c7n_gcp/requirements.txt</cite> to install dependencies.</p>
+</div>
+<div class="section" id="adding-new-gcp-resources">
+<h1>Adding New GCP Resources<a class="headerlink" href="#adding-new-gcp-resources" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="create-new-gcp-resource">
+<h2>Create New GCP Resource<a class="headerlink" href="#create-new-gcp-resource" title="Permalink to this headline">¶</a></h2>
+<p>Most resources extend the QueryResourceManager class. Each class definition will use the &#64;resources.register(‘&lt;resource_name&gt;’) decorator to register that class as a Custodian resource substituting &lt;resource_name&gt; with the new resource name. The name specified in the decorator is how the resource will be referenced within policies.</p>
+<p>Each resource also contains an internal class called <cite>resource_type</cite>, which contains metadata about the resource definition, and has the following attributes:</p>
+<ul>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">service</span></code> is required field, part of the request to GCP resource,</dt><dd><p>The name of GCP service.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">component</span></code> is required field, part of the request to GCP resource,</dt><dd><p>The name of GCP resource,</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">version</span></code> is required field, part of the request to GCP resource,</dt><dd><p>It is the <cite>version</cite> of used resource API,</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">enum_spec</span></code> is a required field,</dt><dd><blockquote>
+<div><p>It has a tuple of (<cite>enum_operation</cite>, <cite>list_operation</cite>, <cite>extra_args</cite>).</p>
+</div></blockquote>
+<ul class="simple">
+<li><p><cite>enum_operation</cite>: the name of the GCP resource method used to retrieve the list of resources,</p></li>
+<li><p><cite>list_operation</cite>: the JMESPath of the field name which contains the resource list in the JSON response body,</p></li>
+<li><p><cite>extra_args</cite>: can be used to set up additional params for a request to GCP.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">id</span></code> is required field,</dt><dd><p>It’s a field name of the response field that have to be used as resource identifier. The <cite>id</cite> value is used for filtering.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">scope</span></code> is optional field, default is None,</dt><dd><p>The scope of the Custodian resource. There are available 2 options: <cite>project</cite> or <cite>None</cite>. If the <cite>scope</cite> has a value <cite>project</cite> the GOOGLE_CLOUD_PROJECT variable will be used for building request to GCP resource. If the scope is <cite>None</cite> the request to GCP is built ignoring the GOOGLE_CLOUD_PROJECT variable.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">parent_spec</span></code> is an optional field that allows to build additional requests to parent resources, default is None.</dt><dd><p>The field is used when the request to GCP resource should be created with extra parameters that can be loaded from parent resources.
+The resource should extend ChildResourceManager instead of QueryResourceManager and use ChildTypeInfo instead of TypeInfo to use the field.
+The <cite>parent_spec</cite> has following fields: <cite>resource</cite>, <cite>child_enum_params</cite>, <cite>parent_get_params</cite>.</p>
+<ul class="simple">
+<li><p>The field <cite>resource</cite> has value of the <cite>resource_name</cite> from &#64;resources.register(‘&lt;resource_name&gt;’) that is used for the target parent resource.</p></li>
+<li><p>The field <cite>child_enum_params</cite> is an array of tuples each of which maps parent instance field (first tuple element) to child’s list argument (second tuple element). The mappings are used for building <cite>list</cite> requests to parent resources. It works by the next scenario. First of all it loads a list of instances from parent resource. Further it loads instances for original resources using GCP resource field values from the loaded parent resources. It uses mappings for GCP resource fields from <cite>child_enum_params</cite>. The first field in a tuple is a field from parent resource, the second one is the mapped original resource field name.</p></li>
+<li><p>The field <cite>parent_get_params</cite> is an array of tuples each of which maps child instance field (first tuple element) to parent’s <cite>resource_info</cite> field. The <cite>resource_info</cite> object has fields like Stackdriver log has. There are 2 options for the fields set: either <cite>resource.labels</cite> and <cite>protoPayload.resourceName</cite> or a log of the full event. The mappings are used for building <cite>get</cite> requests to parent resources.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>An example that uses <cite>parent_spec</cite> is available below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># the class extends ChildResourceManager</span>
+<span class="nd">@resources.register</span><span class="p">(</span><span class="s1">&#39;sql-database&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">SqlDatabase</span><span class="p">(</span><span class="n">ChildResourceManager</span><span class="p">):</span>
+
+    <span class="c1"># the class extends ChildTypeInfo</span>
+    <span class="k">class</span> <span class="nc">resource_type</span><span class="p">(</span><span class="n">ChildTypeInfo</span><span class="p">):</span>
+        <span class="n">service</span> <span class="o">=</span> <span class="s1">&#39;sqladmin&#39;</span>     <span class="c1"># the name of the GCP service</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="s1">&#39;v1beta4&#39;</span>      <span class="c1"># the version of the GCP service</span>
+        <span class="n">component</span> <span class="o">=</span> <span class="s1">&#39;databases&#39;</span>  <span class="c1"># the component of the GCP service</span>
+            <span class="c1"># the `list` method in the resource. https://cloud.google.com/sql/docs/postgres/admin-api/v1beta4/databases/list</span>
+            <span class="c1"># It requires 2 request params: `project` and `instance`. `Project` is set from the environment variable GOOGLE_CLOUD_PROJECT</span>
+            <span class="c1"># `Instance` is set from the parent GCP resource.</span>
+        <span class="n">enum_spec</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">,</span> <span class="s1">&#39;items[]&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="s1">&#39;name&#39;</span>
+        <span class="n">parent_spec</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="c1"># The name of Custodian parent resource.</span>
+            <span class="s1">&#39;resource&#39;</span><span class="p">:</span> <span class="s1">&#39;sql-instance&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;child_enum_params&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="c1"># Each `name` in response from GCP that are loaded</span>
+                <span class="c1">#   using `sql-instance` resource will be used as `instance` for `sql-database` resource</span>
+                <span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;instance&#39;</span><span class="p">)</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;parent_get_params&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="c1"># The `project` value of `sql-database` resource is used as</span>
+                <span class="c1"># `project` for `sql-instance` resource for a `get` request</span>
+                <span class="p">(</span><span class="s1">&#39;project&#39;</span><span class="p">,</span> <span class="s1">&#39;project&#39;</span><span class="p">),</span>
+                <span class="c1"># The `instance` value of `sql-database` resource is used as</span>
+                <span class="c1"># `name` for `sql-instance` resource for a `get` request</span>
+                <span class="p">(</span><span class="s1">&#39;instance&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">)</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+</pre></div>
+</div>
+<p>Most resources have get methods that are created based on the corresponding <cite>get</cite> method of the actual GCP resource.
+As a rule the Custodian <cite>get</cite> method has <cite>resource_info</cite> param. The param has fields that can be found in Stackdriver logs  in <cite>protoPayload.resourceName</cite> and <cite>resource</cite> fields. Examples of the Stackdriver logs are available in tools/c7n_gcp/tests/data/events folder.</p>
+<p>There is an example of the resource below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">c7n_gcp.provider</span> <span class="kn">import</span> <span class="n">resources</span>
+<span class="kn">from</span> <span class="nn">c7n_gcp.query</span> <span class="kn">import</span> <span class="n">QueryResourceManager</span><span class="p">,</span> <span class="n">TypeInfo</span>
+
+<span class="nd">@resources.register</span><span class="p">(</span><span class="s1">&#39;loadbalancer-address&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">LoadBalancingAddress</span><span class="p">(</span><span class="n">QueryResourceManager</span><span class="p">):</span>
+
+    <span class="k">class</span> <span class="nc">resource_type</span><span class="p">(</span><span class="n">TypeInfo</span><span class="p">):</span>
+        <span class="n">service</span> <span class="o">=</span> <span class="s1">&#39;compute&#39;</span>
+        <span class="n">component</span> <span class="o">=</span> <span class="s1">&#39;addresses&#39;</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="s1">&#39;v1&#39;</span>
+        <span class="n">enum_spec</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;aggregatedList&#39;</span><span class="p">,</span> <span class="s1">&#39;items.*.addresses[]&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">scope</span> <span class="o">=</span> <span class="s1">&#39;project&#39;</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="s1">&#39;name&#39;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">resource_info</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">client</span><span class="o">.</span><span class="n">execute_command</span><span class="p">(</span><span class="s1">&#39;get&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;project&#39;</span><span class="p">:</span> <span class="n">resource_info</span><span class="p">[</span><span class="s1">&#39;project_id&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;region&#39;</span><span class="p">:</span> <span class="n">resource_info</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="n">resource_info</span><span class="p">[</span>
+                <span class="s1">&#39;resourceName&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]})</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-new-gcp-resource">
+<h2>Load New GCP Resource<a class="headerlink" href="#load-new-gcp-resource" title="Permalink to this headline">¶</a></h2>
+<p>If you created a new module for a GCP service (i.e. this was the first resource implemented for this service in Custodian),
+then import the new service module in entry.py:</p>
+<p><code class="docutils literal notranslate"><span class="pre">entry.py</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">c7n_gcp.resources.</span><span class="o">&lt;</span><span class="n">name</span> <span class="n">of</span> <span class="n">a</span> <span class="nb">file</span> <span class="k">with</span> <span class="n">created</span> <span class="n">resources</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Each resource has to have test cases. There are implemented test cases for resources list methods and get methods.</p>
+</div>
+</div>
+<div class="section" id="testing">
+<h1>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="test-cases-for-resources-list-methods">
+<h2>Test cases for resources list methods<a class="headerlink" href="#test-cases-for-resources-list-methods" title="Permalink to this headline">¶</a></h2>
+<p>To create a test case for <cite>list</cite> method is used following scenario.</p>
+<ul>
+<li><p>A factory is created based on recording real data from a GCP project resource.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">factory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">record_flight_data</span><span class="p">(</span><span class="o">&lt;</span><span class="n">name</span> <span class="n">of</span> <span class="n">a</span> <span class="nb">file</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">project_id</span><span class="o">=</span><span class="n">project_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p>The <cite>name of a file</cite> means the folder name that has JSON file(s) with expected response(s) on the request from a testing policy.</p>
+<ul>
+<li><p>The factory is used for creating the testing policy.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">policy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_policy</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;policy name&gt;&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;resource&#39;</span><span class="p">:</span> <span class="s1">&#39;gcp.&lt;name of the resource&gt;&#39;</span><span class="p">},</span>
+    <span class="n">session_factory</span><span class="o">=</span><span class="n">factory</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p>The <cite>policy name</cite> means the name of the policy. It can be used any name of the policy.
+The <cite>name of the resource</cite> is the name of testing resource. It’s the <cite>resource_name</cite> from &#64;resources.register(‘&lt;resource_name&gt;’).</p>
+<ul>
+<li><p>The result of the running policy is a list of resources. Below code can be used for the policy running:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">resources</span> <span class="o">=</span> <span class="n">policy</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>The next step is current results verification with expecting results.</p></li>
+<li><p>Last step is replacing <cite>record_flight_data</cite> in creating the factory by <cite>replay_flight_data</cite>. After that step recorded data in JSON files will be used instead of real data. Name of project in GOOGLE_CLOUD_PROJECT may be replaced on any one.</p></li>
+</ul>
+</div>
+<div class="section" id="test-cases-for-resources-get-methods">
+<h2>Test cases for resources get methods<a class="headerlink" href="#test-cases-for-resources-get-methods" title="Permalink to this headline">¶</a></h2>
+<p>To create a test case for <cite>get</cite> method is used following scenario.</p>
+<ul>
+<li><p>A factory was created based on recording real data from a GCP project resource.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">factory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">record_flight_data</span><span class="p">(</span><span class="o">&lt;</span><span class="n">name</span> <span class="n">of</span> <span class="n">a</span> <span class="nb">file</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">project_id</span><span class="o">=</span><span class="n">project_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p>The <cite>name of a file</cite> means the folder name that has JSON file(s) with expected response(s) on the request from a testing policy.</p>
+<ul>
+<li><p>The factory is used for creating the testing policy.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">policy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_policy</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;policy name&gt;&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;resource&#39;</span><span class="p">:</span> <span class="s1">&#39;gcp.&lt;name of the resource&gt;&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;mode&#39;</span><span class="p">:</span> <span class="p">{</span>
+         <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;gcp-audit&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;methods&#39;</span><span class="p">:</span> <span class="p">[]</span>
+     <span class="p">}},</span>
+    <span class="n">session_factory</span><span class="o">=</span><span class="n">factory</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p>The <cite>policy name</cite> means the name of the policy. It can be used any name of the policy.
+The <cite>name of the resource</cite> is the name of testing resource. It’s the <cite>resource_name</cite> from &#64;resources.register(‘&lt;resource_name&gt;’).
+The policy should also be tested in gcp-audit mode to ensure that testing the resource in a serverless environment is covered.</p>
+<ul>
+<li><p>The next step is invoking <cite>get</cite> method of GCP resource that is used for development. The result of invoking is logged in Stackdriver. The result should be copied from Stackdriver log and be put into a JSON file in tools/c7n_gcp/test/data/events folder.</p></li>
+<li><p>The next step is creating an event based on JSON file that was created in the previous step. The event is run within policy’s execution mode. The sample is below.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">exec_mode</span> <span class="o">=</span> <span class="n">policy</span><span class="o">.</span><span class="n">get_execution_mode</span><span class="p">()</span>
+<span class="n">event</span> <span class="o">=</span> <span class="n">event_data</span><span class="p">(</span><span class="s1">&#39;&lt;name of JSON file&gt;&#39;</span><span class="p">)</span>
+<span class="n">instances</span> <span class="o">=</span> <span class="n">exec_mode</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Further current results should be verified with expecting results.</p></li>
+<li><p>Last step is replacing <cite>record_flight_data</cite> in creating the factory by <cite>replay_flight_data</cite>. After that step recorded data in JSON files will be used instead of real data. Name of project in GOOGLE_CLOUD_PROJECT may be replaced on any one.</p></li>
+</ul>
+</div>
+<div class="section" id="running-tests">
+<h2>Running tests<a class="headerlink" href="#running-tests" title="Permalink to this headline">¶</a></h2>
+<p>Tests for c7n_gcp run automatically with other Custodian tests. See <a class="reference internal" href="../developer/tests.html#developer-tests"><span class="std std-ref">Testing for Developers</span></a> for information on how to run Tox.</p>
+<p>If you’d like to run tests at the command line or in your IDE then reference <cite>tox.ini</cite> to see the required
+environment variables and command lines for running <cite>pytest</cite>.</p>
+<p>You can use <cite>tox</cite> to run all tests or instead you can use <cite>pytest</cite> and run only GCP tests (or only specific set of tests). Running recorded tests still requires some authentication, it is possible to use fake data for credentials to GCP and name of Google Cloud project.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">GOOGLE_CLOUD_PROJECT</span><span class="o">=</span>cloud-custodian
+<span class="nb">export</span> <span class="nv">GOOGLE_APPLICATION_CREDENTIALS</span><span class="o">=</span>data/credentials.json
+pytest tools/c7n_gcp/tests
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../tools/c7n-org.html" class="btn btn-neutral float-right" title="c7n-org: Multi Account Custodian Execution" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="policy/resources/loadbalancer.html" class="btn btn-neutral float-left" title="Load Balancer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Capital One Services, LLC
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -147,6 +147,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#standard-lambda-function-config">Standard Lambda Function Config</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#standard-azure-functions-config">Standard Azure Functions Config</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#mailer-infrastructure-config">Mailer Infrastructure Config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#smtp-config">SMTP Config</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#datadog-config">DataDog Config</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#slack-config">Slack Config</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sendgrid-config">SendGrid Config</a></li>
@@ -520,36 +521,6 @@ and here is a description of the options:</p>
 <td align="left">array of strings</td>
 <td align="left">tags that we should look at for address information</td>
 </tr>
-<tr>
-<td align="center"></td>
-<td align="left"><code>smtp_server</code></td>
-<td align="left">string</td>
-<td align="left">if this is unset, aws ses is used by default. To configure your lambda role to talk to smtpd in your private vpc, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/vpc.html">here</a></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="left"><code>smtp_port</code></td>
-<td align="left">integer</td>
-<td align="left">smtp port</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="left"><code>smtp_ssl</code></td>
-<td align="left">boolean</td>
-<td align="left">this defaults to True</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="left"><code>smtp_username</code></td>
-<td align="left">string</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="left"><code>smtp_password</code></td>
-<td align="left">string</td>
-<td align="left"></td>
-</tr>
 </tbody>
 </table><div class="section" id="standard-lambda-function-config">
 <h3>Standard Lambda Function Config<a class="headerlink" href="#standard-lambda-function-config" title="Permalink to this headline">¶</a></h3>
@@ -788,6 +759,51 @@ and here is a description of the options:</p>
 </tr>
 </tbody>
 </table></div>
+<div class="section" id="smtp-config">
+<h3>SMTP Config<a class="headerlink" href="#smtp-config" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th align="center">Required?</th>
+<th align="left">Key</th>
+<th align="left">Type</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td align="left"><code>smtp_server</code></td>
+<td align="left">string</td>
+<td align="left">to configure your lambda role to talk to smtpd in your private vpc, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/vpc.html">here</a></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="left"><code>smtp_port</code></td>
+<td align="left">integer</td>
+<td align="left">smtp port (default is 25)</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="left"><code>smtp_ssl</code></td>
+<td align="left">boolean</td>
+<td align="left">this defaults to True</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="left"><code>smtp_username</code></td>
+<td align="left">string</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="left"><code>smtp_password</code></td>
+<td align="left">string</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table><p>If <code class="docutils literal notranslate"><span class="pre">smtp_server</span></code> is unset, <code class="docutils literal notranslate"><span class="pre">c7n_mailer</span></code> will use AWS SES or Azure SendGrid.</p>
+</div>
 <div class="section" id="datadog-config">
 <h3>DataDog Config<a class="headerlink" href="#datadog-config" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Find Stopped Virtual Machines &mdash; Cloud Custodian  documentation</title>
+  <title>Delete or report on orphan resources (NICs, Disks, Public IPs). &mdash; Cloud Custodian  documentation</title>
   
 
   
@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="../../_static/css/expand.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Add Tag To Virtual Machines" href="tagadd.html" />
-    <link rel="prev" title="Find all SQL Databases with Premium SKU" href="sqldatabasewithpremiumsku.html" /> 
+    <link rel="next" title="Remove public storage IP-s" href="removepublicstorageips.html" />
+    <link rel="prev" title="Deny access to Network Security Group." href="nsg.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -118,7 +118,7 @@
 <li class="toctree-l2"><a class="reference internal" href="metrics.html">Filter resources by metrics from Azure Monitor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notify.html">Email Notify</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nsg.html">Deny access to Network Security Group.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="orphanresources.html">Delete or report on orphan resources (NICs, Disks, Public IPs).</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Delete or report on orphan resources (NICs, Disks, Public IPs).</a></li>
 <li class="toctree-l2"><a class="reference internal" href="removepublicstorageips.html">Remove public storage IP-s</a></li>
 <li class="toctree-l2"><a class="reference internal" href="resizeappplan.html">Resize an Application Service Plan</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rgremoveempty.html">Remove Empty Resource Groups</a></li>
@@ -126,7 +126,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sqldatabaselongtermbackupretention.html">Find SQL Databases with a Monthly Long Term Backup Retention More Than 1 Year</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sqldatabaseshorttermbackupretention.html">Find SQL Databases with a Short Term Backup Retention Less Than 14 Days</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sqldatabasewithpremiumsku.html">Find all SQL Databases with Premium SKU</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Find Stopped Virtual Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stoppedvm.html">Find Stopped Virtual Machines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tagadd.html">Add Tag To Virtual Machines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tagremove.html">Remove Tag From Virtual Machines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tagtrim.html">Trim Tags From Virtual Machines</a></li>
@@ -211,7 +211,7 @@
         
           <li><a href="index.html">Examples</a> &raquo;</li>
         
-      <li>Find Stopped Virtual Machines</li>
+      <li>Delete or report on orphan resources (NICs, Disks, Public IPs).</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -228,17 +228,53 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="find-stopped-virtual-machines">
-<h1>Find Stopped Virtual Machines<a class="headerlink" href="#find-stopped-virtual-machines" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="delete-or-report-on-orphan-resources-nics-disks-public-ips">
+<span id="azure-orphanresources"></span><h1>Delete or report on orphan resources (NICs, Disks, Public IPs).<a class="headerlink" href="#delete-or-report-on-orphan-resources-nics-disks-public-ips" title="Permalink to this headline">¶</a></h1>
+<ul class="simple" id="azure-orphanresources-disk">
+<li><p>Deletes all disks that are not being managed by a VM</p></li>
+</ul>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">stopped-vm</span>
-    <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.vm</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">orphaned-disk</span>
+    <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.disk</span>
     <span class="nt">filters</span><span class="p">:</span>
-     <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">instance-view</span>
-       <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">statuses[].code</span>
-       <span class="nt">op</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">not-in</span>
-       <span class="nt">value_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">swap</span>
-       <span class="nt">value</span><span class="p">:</span> <span class="s">&quot;PowerState/running&quot;</span>
+      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value</span>
+        <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">managedBy</span>
+        <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+    <span class="nt">actions</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">delete</span>
+</pre></div>
+</div>
+<ul class="simple" id="azure-orphanresources-nic">
+<li><p>Gets all Network Interfaces that are not attached to any VM</p></li>
+</ul>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">orphaned-nic</span>
+    <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.networkinterface</span>
+    <span class="nt">filters</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value</span>
+        <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">properties.virtualMachine</span>
+        <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+<ul class="simple" id="azure-orphanresources-publicip">
+<li><p>Queues an email with Public IPs that are not attached to any Network Interfaces. See <a class="reference external" href="https://github.com/cloud-custodian/cloud-custodian/blob/master/tools/c7n_mailer/README.md#using-on-azure">c7n_mailer readme.md</a> for more information on how to send an email.</p></li>
+</ul>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">orphaned-ip</span>
+    <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.publicip</span>
+    <span class="nt">filters</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value</span>
+        <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">properties.ipConfiguration</span>
+        <span class="nt">value</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+    <span class="nt">actions</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">notify</span>
+        <span class="nt">template</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">default</span>
+        <span class="nt">subject</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Orphaned Public IP resource</span>
+        <span class="nt">to</span><span class="p">:</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">someone@somewhere.com</span>
+        <span class="nt">transport</span><span class="p">:</span>
+          <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">asq</span>
+          <span class="nt">queue</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://storagename.queue.core.windows.net/queuename</span>
 </pre></div>
 </div>
 </div>
@@ -251,10 +287,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="tagadd.html" class="btn btn-neutral float-right" title="Add Tag To Virtual Machines" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="removepublicstorageips.html" class="btn btn-neutral float-right" title="Remove public storage IP-s" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="sqldatabasewithpremiumsku.html" class="btn btn-neutral float-left" title="Find all SQL Databases with Premium SKU" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="nsg.html" class="btn btn-neutral float-left" title="Deny access to Network Security Group." accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

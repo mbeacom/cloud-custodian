@@ -100,6 +100,10 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../gettingstarted.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Example Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../aws-modes.html">AWS Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Monitoring your environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lambda.html">Lambda Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mu.html">Mu - Lambda Lifecycle Management</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Filters and Actions</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="ami.html">Amazon Machine Images (AMI)</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Application Load Balancers (AppELB)</a><ul>
@@ -124,10 +128,6 @@
 <li class="toctree-l2"><a class="reference internal" href="s3.html">Simple Storage Service (S3)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../aws-modes.html">AWS Modes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Monitoring your environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lambda.html">Lambda Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../mu.html">Mu - Lambda Lifecycle Management</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Azure</span></p>
 <ul>
@@ -246,11 +246,16 @@
 <div class="header docutils container">
 <p>Schema:</p>
 </div>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;force&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;boolean&quot;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">additionalProperties</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">properties</span><span class="p">:</span>
+  <span class="nt">force</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">boolean</span>
+  <span class="nt">type</span><span class="p">:</span>
+    <span class="nt">enum</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">delete</span>
+<span class="nt">required</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
 </pre></div>
 </div>
 </div>

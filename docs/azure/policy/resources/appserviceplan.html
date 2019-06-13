@@ -100,11 +100,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../aws/gettingstarted.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../aws/examples/index.html">Example Policies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../aws/policy/index.html">Filters and Actions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../aws/aws-modes.html">AWS Modes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../aws/usage.html">Monitoring your environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../aws/policy/lambda.html">Lambda Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../aws/policy/mu.html">Mu - Lambda Lifecycle Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../aws/lambda.html">Lambda Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../aws/mu.html">Mu - Lambda Lifecycle Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../aws/policy/index.html">Filters and Actions</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Azure</span></p>
 <ul class="current">
@@ -275,67 +275,53 @@
 <div class="header docutils container">
 <p>Schema:</p>
 </div>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;default_tz&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;onhour&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;maximum&quot;</span><span class="o">:</span> <span class="mi">23</span><span class="p">,</span>
-    <span class="s2">&quot;minimum&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;integer&quot;</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;opt-out&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;boolean&quot;</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;skip-days&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;items&quot;</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">&quot;pattern&quot;</span><span class="o">:</span> <span class="s2">&quot;^[0-9]{4}-[0-9]{2}-[0-9]{2}&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;array&quot;</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;skip-days-from&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;additionalProperties&quot;</span><span class="o">:</span> <span class="s2">&quot;False&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">&quot;expr&quot;</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s2">&quot;oneOf&quot;</span><span class="o">:</span> <span class="p">[</span>
-          <span class="p">{</span>
-            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;integer&quot;</span>
-          <span class="p">},</span>
-          <span class="p">{</span>
-            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span>
-          <span class="p">}</span>
-        <span class="p">]</span>
-      <span class="p">},</span>
-      <span class="s2">&quot;format&quot;</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span>
-          <span class="s2">&quot;csv&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;json&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;txt&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;csv2dict&quot;</span>
-        <span class="p">]</span>
-      <span class="p">},</span>
-      <span class="s2">&quot;url&quot;</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span>
-      <span class="p">}</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span>
-      <span class="s2">&quot;url&quot;</span>
-    <span class="p">],</span>
-    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;tag&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;weekends&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;boolean&quot;</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;weekends-only&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;boolean&quot;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">additionalProperties</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">properties</span><span class="p">:</span>
+  <span class="nt">default_tz</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+  <span class="nt">onhour</span><span class="p">:</span>
+    <span class="nt">maximum</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">23</span>
+    <span class="nt">minimum</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">integer</span>
+  <span class="nt">opt-out</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">boolean</span>
+  <span class="nt">skip-days</span><span class="p">:</span>
+    <span class="nt">items</span><span class="p">:</span>
+      <span class="nt">pattern</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">^[0-9]{4}-[0-9]{2}-[0-9]{2}</span>
+      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">array</span>
+  <span class="nt">skip-days-from</span><span class="p">:</span>
+    <span class="nt">additionalProperties</span><span class="p">:</span> <span class="s">&#39;False&#39;</span>
+    <span class="nt">properties</span><span class="p">:</span>
+      <span class="nt">expr</span><span class="p">:</span>
+        <span class="nt">oneOf</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">integer</span>
+        <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+      <span class="nt">format</span><span class="p">:</span>
+        <span class="nt">enum</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">csv</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">json</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">txt</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">csv2dict</span>
+      <span class="nt">url</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="nt">required</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">url</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
+  <span class="nt">tag</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+  <span class="nt">type</span><span class="p">:</span>
+    <span class="nt">enum</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">onhour</span>
+  <span class="nt">weekends</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">boolean</span>
+  <span class="nt">weekends-only</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">boolean</span>
+<span class="nt">required</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">onhour</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">default_tz</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
 </pre></div>
 </div>
 </div>
@@ -345,67 +331,53 @@
 <div class="header docutils container">
 <p>Schema:</p>
 </div>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;default_tz&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;offhour&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;maximum&quot;</span><span class="o">:</span> <span class="mi">23</span><span class="p">,</span>
-    <span class="s2">&quot;minimum&quot;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;integer&quot;</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;opt-out&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;boolean&quot;</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;skip-days&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;items&quot;</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">&quot;pattern&quot;</span><span class="o">:</span> <span class="s2">&quot;^[0-9]{4}-[0-9]{2}-[0-9]{2}&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;array&quot;</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;skip-days-from&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;additionalProperties&quot;</span><span class="o">:</span> <span class="s2">&quot;False&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;properties&quot;</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">&quot;expr&quot;</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s2">&quot;oneOf&quot;</span><span class="o">:</span> <span class="p">[</span>
-          <span class="p">{</span>
-            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;integer&quot;</span>
-          <span class="p">},</span>
-          <span class="p">{</span>
-            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span>
-          <span class="p">}</span>
-        <span class="p">]</span>
-      <span class="p">},</span>
-      <span class="s2">&quot;format&quot;</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span>
-          <span class="s2">&quot;csv&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;json&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;txt&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;csv2dict&quot;</span>
-        <span class="p">]</span>
-      <span class="p">},</span>
-      <span class="s2">&quot;url&quot;</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span>
-      <span class="p">}</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="p">[</span>
-      <span class="s2">&quot;url&quot;</span>
-    <span class="p">],</span>
-    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;object&quot;</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;tag&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;weekends&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;boolean&quot;</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;weekends-only&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;boolean&quot;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">additionalProperties</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">properties</span><span class="p">:</span>
+  <span class="nt">default_tz</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+  <span class="nt">offhour</span><span class="p">:</span>
+    <span class="nt">maximum</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">23</span>
+    <span class="nt">minimum</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">integer</span>
+  <span class="nt">opt-out</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">boolean</span>
+  <span class="nt">skip-days</span><span class="p">:</span>
+    <span class="nt">items</span><span class="p">:</span>
+      <span class="nt">pattern</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">^[0-9]{4}-[0-9]{2}-[0-9]{2}</span>
+      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">array</span>
+  <span class="nt">skip-days-from</span><span class="p">:</span>
+    <span class="nt">additionalProperties</span><span class="p">:</span> <span class="s">&#39;False&#39;</span>
+    <span class="nt">properties</span><span class="p">:</span>
+      <span class="nt">expr</span><span class="p">:</span>
+        <span class="nt">oneOf</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">integer</span>
+        <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+      <span class="nt">format</span><span class="p">:</span>
+        <span class="nt">enum</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">csv</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">json</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">txt</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">csv2dict</span>
+      <span class="nt">url</span><span class="p">:</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="nt">required</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">url</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
+  <span class="nt">tag</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+  <span class="nt">type</span><span class="p">:</span>
+    <span class="nt">enum</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">offhour</span>
+  <span class="nt">weekends</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">boolean</span>
+  <span class="nt">weekends-only</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">boolean</span>
+<span class="nt">required</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">offhour</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">default_tz</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
 </pre></div>
 </div>
 </div>
@@ -422,33 +394,36 @@ Resize an app service plan by changing either the SKU or the number of instances
 <div class="header docutils container">
 <p>Schema:</p>
 </div>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;count&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;integer&quot;</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;size&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span>
-      <span class="s2">&quot;F1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;B1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;B2&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;B3&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;D1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;S1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;S2&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;S3&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;P1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;P2&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;P3&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;P1V2&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;P2V2&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;P3v2&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;PC2&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;PC3&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;PC4&quot;</span>
-    <span class="p">],</span>
-    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;string&quot;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">additionalProperties</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">properties</span><span class="p">:</span>
+  <span class="nt">count</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">integer</span>
+  <span class="nt">size</span><span class="p">:</span>
+    <span class="nt">enum</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">F1</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">B1</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">B2</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">B3</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">D1</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">S1</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">S2</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">S3</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">P1</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">P2</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">P3</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">P1V2</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">P2V2</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">P3v2</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">PC2</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">PC3</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">PC4</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+  <span class="nt">type</span><span class="p">:</span>
+    <span class="nt">enum</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">resize-plan</span>
+<span class="nt">required</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
 </pre></div>
 </div>
 </div>

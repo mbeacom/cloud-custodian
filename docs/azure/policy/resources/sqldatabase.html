@@ -100,11 +100,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../aws/gettingstarted.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../aws/examples/index.html">Example Policies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../aws/policy/index.html">Filters and Actions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../aws/aws-modes.html">AWS Modes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../aws/usage.html">Monitoring your environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../aws/policy/lambda.html">Lambda Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../aws/policy/mu.html">Mu - Lambda Lifecycle Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../aws/lambda.html">Lambda Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../aws/mu.html">Mu - Lambda Lifecycle Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../aws/policy/index.html">Filters and Actions</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Azure</span></p>
 <ul class="current">
@@ -284,28 +284,31 @@ resource, and the SQL Server parent id is available as the <cite>c7n:parent-id</
 <div class="header docutils container">
 <p>Schema:</p>
 </div>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;op&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span>
-      <span class="s2">&quot;eq&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;equal&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;ne&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;not-equal&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;gt&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;greater-than&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;ge&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;gte&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;le&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;lte&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;lt&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;less-than&quot;</span>
-    <span class="p">]</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;retention-period-days&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">additionalProperties</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">properties</span><span class="p">:</span>
+  <span class="nt">op</span><span class="p">:</span>
+    <span class="nt">enum</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">eq</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">equal</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ne</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">not-equal</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gt</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">greater-than</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ge</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gte</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">le</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">lte</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">lt</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">less-than</span>
+  <span class="nt">retention-period-days</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">number</span>
+  <span class="nt">type</span><span class="p">:</span>
+    <span class="nt">enum</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">short-term-backup-retention-policy</span>
+<span class="nt">required</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">retention-period-days</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
 </pre></div>
 </div>
 </div>
@@ -330,49 +333,48 @@ resource, and the SQL Server parent id is available as the <cite>c7n:parent-id</
 <div class="header docutils container">
 <p>Schema:</p>
 </div>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;backup-type&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span>
-      <span class="s2">&quot;weekly&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;monthly&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;yearly&quot;</span>
-    <span class="p">],</span>
-    <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="kc">true</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;op&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span>
-      <span class="s2">&quot;eq&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;equal&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;ne&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;not-equal&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;gt&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;greater-than&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;ge&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;gte&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;le&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;lte&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;lt&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;less-than&quot;</span>
-    <span class="p">]</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;retention-period&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;retention-period-units&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;enum&quot;</span><span class="o">:</span> <span class="p">[</span>
-      <span class="s2">&quot;day&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;days&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;week&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;weeks&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;month&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;months&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;year&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;years&quot;</span>
-    <span class="p">],</span>
-    <span class="s2">&quot;required&quot;</span><span class="o">:</span> <span class="kc">true</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">additionalProperties</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">properties</span><span class="p">:</span>
+  <span class="nt">backup-type</span><span class="p">:</span>
+    <span class="nt">enum</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">weekly</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">monthly</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">yearly</span>
+  <span class="nt">op</span><span class="p">:</span>
+    <span class="nt">enum</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">eq</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">equal</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ne</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">not-equal</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gt</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">greater-than</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ge</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gte</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">le</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">lte</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">lt</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">less-than</span>
+  <span class="nt">retention-period</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">number</span>
+  <span class="nt">retention-period-units</span><span class="p">:</span>
+    <span class="nt">enum</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">day</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">days</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">week</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">weeks</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">month</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">months</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">year</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">years</span>
+  <span class="nt">type</span><span class="p">:</span>
+    <span class="nt">enum</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">long-term-backup-retention-policy</span>
+<span class="nt">required</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">backup-type</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">retention-period</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">retention-period-units</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
 </pre></div>
 </div>
 </div>

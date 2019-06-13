@@ -100,6 +100,10 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../gettingstarted.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Example Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../aws-modes.html">AWS Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Monitoring your environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../lambda.html">Lambda Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mu.html">Mu - Lambda Lifecycle Management</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Filters and Actions</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="ami.html">Amazon Machine Images (AMI)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="appelb.html">Application Load Balancers (AppELB)</a></li>
@@ -124,10 +128,6 @@
 <li class="toctree-l2"><a class="reference internal" href="s3.html">Simple Storage Service (S3)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../aws-modes.html">AWS Modes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Monitoring your environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lambda.html">Lambda Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../mu.html">Mu - Lambda Lifecycle Management</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Azure</span></p>
 <ul>
@@ -237,23 +237,10 @@
 <ul class="simple">
 <li><p>Standard Value Filter (see <a class="reference internal" href="../../../filters.html#filters"><span class="std std-ref">Generic Filters</span></a>)</p></li>
 </ul>
-<dl>
-<dt><code class="docutils literal notranslate"><span class="pre">age</span></code></dt><dd><p>Based on <code class="docutils literal notranslate"><span class="pre">SnapshotCreateTime</span></code> of the snapshot, the time stamp when the snapshot was created, in days</p>
-<div class="toggle docutils container">
-<div class="header docutils container">
-<p>Schema:</p>
-</div>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;days&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;number&quot;</span>
-  <span class="p">},</span>
-  <span class="s2">&quot;op&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;$ref&quot;</span><span class="o">:</span> <span class="s2">&quot;#/definitions/filters_common/comparison_operators&quot;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">age</span></code></dt><dd><p>Based on <code class="docutils literal notranslate"><span class="pre">SnapshotCreateTime</span></code> of the snapshot, the time stamp when the snapshot was created, in days
+<strong>Deprecated</strong> use value filter with <cite>value_type: age</cite>
+.. c7n-schema:: aws.rds.filters.age</p>
 </dd>
 </dl>
 </div>
@@ -265,7 +252,18 @@
 <div class="header docutils container">
 <p>Schema:</p>
 </div>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">additionalProperties</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">properties</span><span class="p">:</span>
+  <span class="nt">copy-restore-info</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">boolean</span>
+  <span class="nt">skip-snapshot</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">boolean</span>
+  <span class="nt">type</span><span class="p">:</span>
+    <span class="nt">enum</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">delete</span>
+<span class="nt">required</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
 </pre></div>
 </div>
 </div>

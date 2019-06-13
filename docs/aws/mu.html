@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>c7n-policystream: Policy Changes from Git &mdash; Cloud Custodian  documentation</title>
+  <title>Mu - Lambda Lifecycle Management &mdash; Cloud Custodian  documentation</title>
   
 
   
@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="../_static/css/expand.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="c7n-mailer: Custodian Mailer" href="c7n-mailer.html" />
-    <link rel="prev" title="c7n-org: Multi Account Custodian Execution" href="c7n-org.html" /> 
+    <link rel="next" title="Filters and Actions" href="policy/index.html" />
+    <link rel="prev" title="Lambda Support" href="lambda.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -97,14 +97,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../overview/deployment.html">Deployment</a></li>
 </ul>
 <p class="caption"><span class="caption-text">AWS</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../aws/gettingstarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../aws/examples/index.html">Example Policies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../aws/aws-modes.html">AWS Modes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../aws/usage.html">Monitoring your environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../aws/lambda.html">Lambda Support</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../aws/mu.html">Mu - Lambda Lifecycle Management</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../aws/policy/index.html">Filters and Actions</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Example Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aws-modes.html">AWS Modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Monitoring your environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lambda.html">Lambda Support</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Mu - Lambda Lifecycle Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policy/index.html">Filters and Actions</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Azure</span></p>
 <ul>
@@ -130,17 +130,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../gcp/contribute.html#testing">Testing</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Tools</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="c7n-org.html">c7n-org: Multi Account Custodian Execution</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">c7n-policystream: Policy Changes from Git</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#install">Install</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#build">Build</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#options">Options</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="c7n-mailer.html">c7n-mailer: Custodian Mailer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="c7n-trailcreator.html">AWS Retroactive Tagging Resource Creators</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tools/c7n-org.html">c7n-org: Multi Account Custodian Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/c7n-policystream.html">c7n-policystream: Policy Changes from Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/c7n-mailer.html">c7n-mailer: Custodian Mailer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/c7n-trailcreator.html">AWS Retroactive Tagging Resource Creators</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Contributing</span></p>
 <ul>
@@ -194,7 +188,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>c7n-policystream: Policy Changes from Git</li>
+      <li>Mu - Lambda Lifecycle Management</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -211,97 +205,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="c7n-policystream-policy-changes-from-git">
-<h1>c7n-policystream: Policy Changes from Git<a class="headerlink" href="#c7n-policystream-policy-changes-from-git" title="Permalink to this headline">¶</a></h1>
-<p>Using custodian in accordance with infrastructure as code principles,
-we store policy assets in a versioned control repository. This
-provides for an audit log and facilitates code reviews. However this
-capability is primarily of use to humans making semantic interpretations
-of changes.</p>
-<p>This script also provides logical custodian policy changes over a git
-repo and allows streaming those changes for machine readable/application
-consumption. Its typically used as a basis for CI integrations or indexes
-over policies.</p>
-<p>Two example use cases:</p>
-<ul class="simple">
-<li><p>Doing dryrun only on changed policies within a pull request</p></li>
-<li><p>Constructing a database of policy changes.</p></li>
-</ul>
-<p>Policystream works on individual github repositories, or per Github integration
-across an organization’s set of repositories.</p>
-<div class="section" id="install">
-<h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
-<p>policystream can be installed via pypi, provided the require pre-requisites
-libraries are available (libgit2 &gt; 0.26)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">c7n</span><span class="o">-</span><span class="n">policystream</span>
-</pre></div>
-</div>
-<p>Docker images available soon, see build for constructing your own.</p>
-</div>
-<div class="section" id="build">
-<h2>Build<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h2>
-<p>Alternatively a docker image can be built as follows</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note must be top level directory of checkout</span>
-<span class="nb">cd</span> cloud-custodian
-
-docker build -t policystream:latest -f tools/c7n_policystream/Dockerfile .
-
-docker run --mount <span class="nv">src</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">&quot;</span>,target<span class="o">=</span>/repos,type<span class="o">=</span><span class="nb">bind</span> policystream:latest
-</pre></div>
-</div>
-</div>
-<div class="section" id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
-<p>Streaming use case (default stream is to stdout, also supports kinesis, rdbms and sqs)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  $ c7n-policystream stream -r foo
-  2018-08-12 12:37:00,567: c7n.policystream:INFO Cloning repository: foo
-  &lt;policy-add policy:foi provider:aws resource:ec2 date:2018-08-02T15:13:28-07:00 author:Kapil commit:09cb85&gt;
-  &lt;policy-moved policy:foi provider:aws resource:ec2 date:2018-08-02T15:14:24-07:00 author:Kapil commit:76fce7&gt;
-  &lt;policy-remove policy:foi provider:aws resource:ec2 date:2018-08-02T15:14:46-07:00 author:Kapil commit:570ca4&gt;
-  &lt;policy-add policy:ec2-guard-duty provider:aws resource:ec2 date:2018-08-02T15:14:46-07:00 author:Kapil commit:570ca4&gt;
-  &lt;policy-add policy:ec2-run provider:aws resource:ec2 date:2018-08-02T15:16:00-07:00 author:Kapil commit:d3d8d4&gt;
-  &lt;policy-remove policy:ec2-run provider:aws resource:ec2 date:2018-08-02T15:18:31-07:00 author:Kapil commit:922c1a&gt;
-  &lt;policy-modified policy:ec2-guard-duty provider:aws resource:ec2 date:2018-08-12T09:39:43-04:00 author:Kapil commit:189ea1&gt;
-  2018-08-12 12:37:01,275: c7n.policystream:INFO Streamed 7 policy changes
-</pre></div>
-</div>
-<p>Policy diff between two source and target revision specs. If source
-and target are not specified default revision selection is dependent
-on current working tree branch. The intent is for two use cases, if on
-a non-master branch then show the diff to master.  If on master show
-the diff to previous commit on master. For repositories not using the
-<code class="docutils literal notranslate"><span class="pre">master</span></code> convention, please specify explicit source and target.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  $ c7n-policystream diff -r foo -v
-</pre></div>
-</div>
-<p>Pull request use, output policies changes between current branch and master.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  $ c7n-policystream diff -r foo
-  policies:
-  - filters:
-    - {type: cross-account}
-    name: lambda-access-check
-    resource: aws.lambda
-</pre></div>
-</div>
-</div>
-<div class="section" id="options">
-<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ c7n-policystream --help
-Usage: c7n-policystream [OPTIONS] COMMAND [ARGS]...
-
-  Policy changes from git history
-
-Options:
-  --help  Show this message and exit.
-
-Commands:
-  diff          Policy diff between two arbitrary revisions.
-  org-checkout  Checkout repositories from a GitHub organization.
-  org-stream    Stream changes for repos in a GitHub organization.
-  stream        Stream git history policy changes to destination.
-</pre></div>
-</div>
-</div>
+  <div class="section" id="mu-lambda-lifecycle-management">
+<span id="mu"></span><h1>Mu - Lambda Lifecycle Management<a class="headerlink" href="#mu-lambda-lifecycle-management" title="Permalink to this headline">¶</a></h1>
+<p>For full Lambda lifecycle management we built Mu. We needed the
+ability to create all the resources associated with a given Custodian
+policy. These resources can include event sources for Lambda
+functions such as Cloud Watch Events and Scheduled Events. We also
+needed the ability to manage different versions of the policy and
+did not want to update the Lambda functions during every Custodian
+run.</p>
+<p>Mu will evaluate if a policy has changed by comparing the
+compiled Lambda function to the current Lambda function. Mu will also
+update the event sources if the policy has been updated.</p>
 </div>
 
 
@@ -312,10 +227,10 @@ Commands:
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="c7n-mailer.html" class="btn btn-neutral float-right" title="c7n-mailer: Custodian Mailer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="policy/index.html" class="btn btn-neutral float-right" title="Filters and Actions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="c7n-org.html" class="btn btn-neutral float-left" title="c7n-org: Multi Account Custodian Execution" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="lambda.html" class="btn btn-neutral float-left" title="Lambda Support" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

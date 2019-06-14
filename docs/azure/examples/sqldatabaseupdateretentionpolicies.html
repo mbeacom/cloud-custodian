@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Find Stopped Virtual Machines &mdash; Cloud Custodian  documentation</title>
+  <title>Update SQL Database Retention Policies &mdash; Cloud Custodian  documentation</title>
   
 
   
@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="../../_static/css/expand.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Add Tag To Virtual Machines" href="tagadd.html" />
-    <link rel="prev" title="Find all SQL Databases with Premium SKU" href="sqldatabasewithpremiumsku.html" /> 
+    <link rel="next" title="Find all SQL Databases with Premium SKU" href="sqldatabasewithpremiumsku.html" />
+    <link rel="prev" title="Find SQL Databases with a Short Term Backup Retention Less Than 14 Days" href="sqldatabaseshorttermbackupretention.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -125,9 +125,9 @@
 <li class="toctree-l2"><a class="reference internal" href="routetablewithsubnet.html">Find Route Tables With A Specific Subnet</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sqldatabaselongtermbackupretention.html">Find SQL Databases with a Monthly Long Term Backup Retention More Than 1 Year</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sqldatabaseshorttermbackupretention.html">Find SQL Databases with a Short Term Backup Retention Less Than 14 Days</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sqldatabaseupdateretentionpolicies.html">Update SQL Database Retention Policies</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Update SQL Database Retention Policies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sqldatabasewithpremiumsku.html">Find all SQL Databases with Premium SKU</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Find Stopped Virtual Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stoppedvm.html">Find Stopped Virtual Machines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tagadd.html">Add Tag To Virtual Machines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tagremove.html">Remove Tag From Virtual Machines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tagtrim.html">Trim Tags From Virtual Machines</a></li>
@@ -212,7 +212,7 @@
         
           <li><a href="index.html">Examples</a> &raquo;</li>
         
-      <li>Find Stopped Virtual Machines</li>
+      <li>Update SQL Database Retention Policies</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -229,17 +229,36 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="find-stopped-virtual-machines">
-<h1>Find Stopped Virtual Machines<a class="headerlink" href="#find-stopped-virtual-machines" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="update-sql-database-retention-policies">
+<span id="azure-examples-sqldatabaseupdateretentionpolicies"></span><h1>Update SQL Database Retention Policies<a class="headerlink" href="#update-sql-database-retention-policies" title="Permalink to this headline">¶</a></h1>
+<p>Update any SQL Database short term retentions to at least 7 days</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">stopped-vm</span>
-    <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.vm</span>
-    <span class="nt">filters</span><span class="p">:</span>
-     <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">instance-view</span>
-       <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">statuses[].code</span>
-       <span class="nt">op</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">not-in</span>
-       <span class="nt">value_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">swap</span>
-       <span class="nt">value</span><span class="p">:</span> <span class="s">&quot;PowerState/running&quot;</span>
+   <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">update-short-term-backup-retention-policy</span>
+     <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.sqldatabase</span>
+     <span class="nt">filters</span><span class="p">:</span>
+     <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">short-term-backup-retention</span>
+        <span class="l l-Scalar l-Scalar-Plain">op</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">lt</span>
+        <span class="l l-Scalar l-Scalar-Plain">retention-period-days</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">7</span>
+     <span class="nt">actions</span><span class="p">:</span>
+     <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">update-short-term-backup-retention</span>
+        <span class="l l-Scalar l-Scalar-Plain">retention-period-days</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">7</span>
+</pre></div>
+</div>
+<p>Enforce a 1 month maximum retention for weekly backups on all SQL Databases</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
+   <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">update-long-term-backup-retention-policy</span>
+     <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.sqldatabase</span>
+     <span class="nt">filters</span><span class="p">:</span>
+     <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">long-term-backup-retention</span>
+        <span class="l l-Scalar l-Scalar-Plain">backup-type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">weekly</span>
+        <span class="l l-Scalar l-Scalar-Plain">op</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">gt</span>
+        <span class="l l-Scalar l-Scalar-Plain">retention-period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+        <span class="l l-Scalar l-Scalar-Plain">retention-period-units</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">months</span>
+     <span class="nt">actions</span><span class="p">:</span>
+     <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">update-long-term-backup-retention</span>
+        <span class="l l-Scalar l-Scalar-Plain">backup-type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">weekly</span>
+        <span class="l l-Scalar l-Scalar-Plain">retention-period</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+        <span class="l l-Scalar l-Scalar-Plain">retention-period-units</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">months</span>
 </pre></div>
 </div>
 </div>
@@ -252,10 +271,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="tagadd.html" class="btn btn-neutral float-right" title="Add Tag To Virtual Machines" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sqldatabasewithpremiumsku.html" class="btn btn-neutral float-right" title="Find all SQL Databases with Premium SKU" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="sqldatabasewithpremiumsku.html" class="btn btn-neutral float-left" title="Find all SQL Databases with Premium SKU" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="sqldatabaseshorttermbackupretention.html" class="btn btn-neutral float-left" title="Find SQL Databases with a Short Term Backup Retention Less Than 14 Days" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -274,7 +274,7 @@ resource, and the SQL Server parent id is available as the <cite>c7n:parent-id</
 </dl>
 </li>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">short-term-backup-retention-policy</span></code></dt><dd><ul class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">short-term-backup-retention</span></code></dt><dd><ul class="simple">
 <li><p>Filter on the retention period (in days) of the database’s short term backup retention policy.</p></li>
 <li><p>more info on <a class="reference external" href="https://docs.microsoft.com/en-us/azure/sql-database/sql-database-automated-backups">Short Term Backups</a></p></li>
 <li><p>If there is no short term backup retention policy set on the database, it is treated as if the retention is zero days.</p></li>
@@ -305,6 +305,7 @@ resource, and the SQL Server parent id is available as the <cite>c7n:parent-id</
   <span class="nt">type</span><span class="p">:</span>
     <span class="nt">enum</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">short-term-backup-retention-policy</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">short-term-backup-retention</span>
 <span class="nt">required</span><span class="p">:</span>
 <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">retention-period-days</span>
 <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span>
@@ -316,7 +317,7 @@ resource, and the SQL Server parent id is available as the <cite>c7n:parent-id</
 </dl>
 </li>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">long-term-backup-retention-policy</span></code></dt><dd><ul class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">long-term-backup-retention</span></code></dt><dd><ul class="simple">
 <li><p>Filter on the retention period of the database’s long term backup retention policy.</p></li>
 <li><p>more info on <a class="reference external" href="https://docs.microsoft.com/en-us/azure/sql-database/sql-database-long-term-retention">Long Term Backups</a></p></li>
 <li><p>If the specified backup type has not been set on the resource, it is treated as if the retention period is zero.</p></li>
@@ -369,6 +370,7 @@ resource, and the SQL Server parent id is available as the <cite>c7n:parent-id</
   <span class="nt">type</span><span class="p">:</span>
     <span class="nt">enum</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">long-term-backup-retention-policy</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">long-term-backup-retention</span>
 <span class="nt">required</span><span class="p">:</span>
 <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">backup-type</span>
 <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">retention-period</span>
@@ -385,8 +387,75 @@ resource, and the SQL Server parent id is available as the <cite>c7n:parent-id</
 </div>
 <div class="section" id="actions">
 <h2>Actions<a class="headerlink" href="#actions" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
+<ul>
 <li><p>ARM Resource Actions (see <a class="reference internal" href="../genericarmaction.html#azure-genericarmaction"><span class="std std-ref">Generic Actions</span></a>)</p></li>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">update-short-term-backup-retention</span></code></dt><dd><ul class="simple">
+<li><p>Update the retention period (in days) for a database’s short term backup retention policy.</p></li>
+</ul>
+<div class="toggle docutils container">
+<div class="header docutils container">
+<p>Schema:</p>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">additionalProperties</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">properties</span><span class="p">:</span>
+  <span class="nt">op</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+  <span class="nt">retention-period-days</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">number</span>
+  <span class="nt">type</span><span class="p">:</span>
+    <span class="nt">enum</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">update-short-term-backup-retention-policy</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">update-short-term-backup-retention</span>
+<span class="nt">required</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
+</pre></div>
+</div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">update-long-term-backup-retention</span></code></dt><dd><ul class="simple">
+<li><p>Update the retention period for a database’s long term backup retention policy.</p></li>
+</ul>
+<div class="toggle docutils container">
+<div class="header docutils container">
+<p>Schema:</p>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">additionalProperties</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">properties</span><span class="p">:</span>
+  <span class="nt">backup-type</span><span class="p">:</span>
+    <span class="nt">enum</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">weekly</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">monthly</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">yearly</span>
+  <span class="nt">op</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+  <span class="nt">retention-period</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">number</span>
+  <span class="nt">retention-period-units</span><span class="p">:</span>
+    <span class="nt">enum</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">day</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">days</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">week</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">weeks</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">month</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">months</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">year</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">years</span>
+  <span class="nt">type</span><span class="p">:</span>
+    <span class="nt">enum</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">update-long-term-backup-retention-policy</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">update-long-term-backup-retention</span>
+<span class="nt">required</span><span class="p">:</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
+</pre></div>
+</div>
+</div>
+</dd>
+</dl>
+</li>
 </ul>
 </div>
 <div class="section" id="example-policies">
@@ -395,6 +464,7 @@ resource, and the SQL Server parent id is available as the <cite>c7n:parent-id</
 <li><p><a class="reference internal" href="../../examples/sqldatabasewithpremiumsku.html#azure-examples-sqldatabasewithpremiumsku"><span class="std std-ref">Find all SQL Databases with Premium SKU</span></a></p></li>
 <li><p><a class="reference internal" href="../../examples/sqldatabaseshorttermbackupretention.html#azure-examples-sqldatabaseshorttermbackupretention"><span class="std std-ref">Find SQL Databases with a Short Term Backup Retention Less Than 14 Days</span></a></p></li>
 <li><p><a class="reference internal" href="../../examples/sqldatabaselongtermbackupretention.html#azure-examples-sqldatabaselongtermbackupretention"><span class="std std-ref">Find SQL Databases with a Monthly Long Term Backup Retention More Than 1 Year</span></a></p></li>
+<li><p><a class="reference internal" href="../../examples/sqldatabaseupdateretentionpolicies.html#azure-examples-sqldatabaseupdateretentionpolicies"><span class="std std-ref">Update SQL Database Retention Policies</span></a></p></li>
 </ul>
 </div>
 </div>

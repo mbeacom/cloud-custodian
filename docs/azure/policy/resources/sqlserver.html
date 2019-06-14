@@ -116,7 +116,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../delayedoperation.html">Delayed Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../genericarmaction.html">Generic Actions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../genericarmfilter.html">Generic Filters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../filters.html">Generic Filters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="accesscontrol.html">Access Control</a></li>
 <li class="toctree-l2"><a class="reference internal" href="aks.html">Azure Kubernetes Service</a></li>
 <li class="toctree-l2"><a class="reference internal" href="appserviceplan.html">App Service Plan</a></li>
@@ -272,7 +271,11 @@
 </dl>
 </li>
 <li><dl>
-<dt><code class="docutils literal notranslate"><span class="pre">firewall-rules</span></code></dt><dd><p>Firewall Rules Filter (see <a class="reference internal" href="../filters.html#azure-filters"><span class="std std-ref">Generic Filters</span></a>)</p>
+<dt><code class="docutils literal notranslate"><span class="pre">firewall-rules</span></code> Firewall Rules Filter</dt><dd><p>Filter based on firewall rules. Rules can be specified as x.x.x.x-y.y.y.y or x.x.x.x or x.x.x.x/y.</p>
+<ul class="simple">
+<li><p><cite>include</cite>: the list of IP ranges or CIDR that firewall rules must include. The list must be a subset of the exact rules as is, the ranges will not be combined.</p></li>
+<li><p><cite>equal</cite>: the list of IP ranges or CIDR that firewall rules must match exactly.</p></li>
+</ul>
 <div class="toggle docutils container">
 <div class="header docutils container">
 <p>Schema:</p>

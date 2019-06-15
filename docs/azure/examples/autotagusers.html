@@ -232,12 +232,20 @@
   <div class="section" id="automatically-tag-the-creator-of-a-resource-or-resource-group">
 <h1>Automatically tag the creator of a resource or resource group.<a class="headerlink" href="#automatically-tag-the-creator-of-a-resource-or-resource-group" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><p>In non-event mode, the action will look up Azure Activity Logs up to 90 days prior to execution (default). It will attempt to identify the first user or service principal that performed the ‘write’ operation for each resource.</p></li>
-<li><p>In event mode, the action will use the data from the event to determine the user or principal that performed the action. The <strong>days</strong> option is not applicable in this mode.</p></li>
+<li><p>It is strongly recommended to always use <code class="docutils literal notranslate"><span class="pre">resource-type</span></code> filter when using <code class="docutils literal notranslate"><span class="pre">armresource</span></code>.</p></li>
+<li><p>Tag operation is allowed only for ARM resources supported by Cloud Custodian, error message is logged
+for all unknown and unsupported resources.</p></li>
+<li><p>In non-event mode, the action will look up Azure Activity Logs up to 90 days prior to execution (default).
+It will attempt to identify the first user or service principal that performed the ‘write’
+operation for each resource.</p></li>
+<li><p>In event mode, the action will use the data from the event to determine the user or principal
+that performed the action. The <strong>days</strong>
+option is not applicable in this mode.</p></li>
+<li><p><strong>Note</strong>: Resource Groups aren’t a part of <code class="docutils literal notranslate"><span class="pre">armresource</span></code> type, so tags needs to be added separately.</p></li>
 <li><p><strong>Note</strong>: Service Principals do not have email addresses and their tag values will be the application id.</p></li>
 </ul>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure-auto-tag-creator</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure-auto-tag-creator-resource-groups</span>
     <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.resourcegroup</span>
     <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">|</span>
       <span class="no">Tag all existing resource groups with the &#39;CreatorEmail&#39; tag; looking up to 10 days prior.</span>
@@ -248,16 +256,32 @@
 </pre></div>
 </div>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure-auto-tag-creator-resources</span>
+    <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.armresource</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+      <span class="no">Tag all arm resources of the VMs, VNETs and Storage accounts with the</span>
+      <span class="no">&#39;Creator Email&#39; tag; looking up to 10 days prior.</span>
+    <span class="nt">filters</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">resource-type</span>
+        <span class="nt">values</span><span class="p">:</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Microsoft.Network/virtualNetworks</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Microsoft.Storage/storageAccounts</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Microsoft.Compute/virtualMachines</span>
+    <span class="nt">actions</span><span class="p">:</span>
+     <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">auto-tag-user</span>
+       <span class="nt">tag</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">CreatorEmail</span>
+       <span class="nt">days</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
+</pre></div>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">policies</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure-auto-tag-creator</span>
     <span class="nt">mode</span><span class="p">:</span>
       <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure-event-grid</span>
-      <span class="nt">events</span><span class="p">:</span> <span class="p p-Indicator">[{</span>
-<span class="nt">          resourceProvider</span><span class="p">:</span> <span class="s">&#39;Microsoft.Compute/virtualMachines&#39;</span><span class="p p-Indicator">,</span>
-<span class="nt">          event</span><span class="p">:</span> <span class="s">&#39;write&#39;</span>
-      <span class="p p-Indicator">}]</span>
-    <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.vm</span>
+      <span class="nt">events</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;VmWrite&#39;</span><span class="p p-Indicator">,</span> <span class="s">&#39;StorageWrite&#39;</span><span class="p p-Indicator">]</span>
+    <span class="nt">resource</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">azure.armresource</span>
     <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">|</span>
-      <span class="no">Tag all existing virtual machines with the &#39;CreatorEmail&#39; tag using ARM events.</span>
+      <span class="no">Tag all new VMs and StorageAccounts with the &#39;Creator Email&#39; tag.</span>
+      <span class="no">Note: &#39;resource-type&#39; filter is not required because policy is not triggered by other resources.</span>
     <span class="nt">actions</span><span class="p">:</span>
      <span class="p p-Indicator">-</span> <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">auto-tag-user</span>
        <span class="nt">tag</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">CreatorEmail</span>
